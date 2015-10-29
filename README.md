@@ -5,8 +5,12 @@ see https://github.com/wjakob/nanogui for license details
 
 if you want to run the demo as is you'll need to change the path to the icon images in line 113 of View.cpp
 
+Tested on vs2015 only
+
 to use in your own Cinder projects:
 -----------------------------------
--copy the "gui" folder into your project.
+-copy the "gui" folder into your project
+
 -create your own gui in View->create()
+
 -create a ViewRef in your app and make the appropriate calls to it as in this NanoApp demo 
