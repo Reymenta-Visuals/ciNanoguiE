@@ -1,8 +1,10 @@
 
 #include "NanoApp.h"
 
+using namespace std;
+
 NanoApp::NanoApp()
-  // : gui (nullptr)
+   : gui (nullptr)
 {
 }
 
@@ -12,8 +14,8 @@ NanoApp::~NanoApp()
 
 void NanoApp::setup()
 {
- /*  gui = std::make_shared<View>();
-   gui->create (getWindow());*/
+   gui = std::make_shared<View>();
+   gui->create (getWindow());
 }
 
 void NanoApp::update()
@@ -26,16 +28,16 @@ void NanoApp::cleanup()
 
 void NanoApp::draw()
 {
-   //// performance data
-   //double t, dt;
-   //t = getElapsedSeconds();
-   //dt = t - prevt;
-   //prevt = t;
+   // performance data
+   double t, dt;
+   t = getElapsedSeconds();
+   dt = t - prevt;
+   prevt = t;
    render();
-   //gui->draw (getElapsedSeconds());
-   //// Measure the CPU time taken excluding swap buffers (as the swap may wait for GPU)
-   //cpuTime = getElapsedSeconds() - t;
-   //gui->updatePerfGraph ((float)dt, (float)cpuTime);
+   gui->draw (getElapsedSeconds());
+   // Measure the CPU time taken excluding swap buffers (as the swap may wait for GPU)
+   cpuTime = getElapsedSeconds() - t;
+   gui->updatePerfGraph ((float)dt, (float)cpuTime);
 }
 
 void NanoApp::render()
@@ -50,14 +52,14 @@ void NanoApp::render()
 void NanoApp::mouseMove (MouseEvent event)
 {
    mousePos = event.getPos();
-  // gui->mouseMove (event);
+   gui->mouseMove (event);
 }
 
 void NanoApp::mouseDown (MouseEvent event)
 {
-  // usingGui = gui->mouseDown (event);
+   usingGui = gui->mouseDown (event);
    // don't update cameraUI if we're using the gui
-  // if (!usingGui)
+   if (!usingGui)
       cameraUI.mouseDown (event.getPos());
 }
 
@@ -65,15 +67,15 @@ void NanoApp::mouseDrag (MouseEvent event)
 {
    mousePos = event.getPos();
    // don't update cameraUI if we're using the gui
-  // if (!usingGui)
+   if (!usingGui)
       cameraUI.mouseDrag (event.getPos(), event.isLeftDown(), event.isMiddleDown(), event.isRightDown());
-  // gui->mouseDrag (event);
+   gui->mouseDrag (event);
 }
 
 void NanoApp::mouseUp (MouseEvent event)
 {
-  // gui->mouseUp (event);
-  // usingGui = false;
+   gui->mouseUp (event);
+   usingGui = false;
 }
 
 void NanoApp::keyDown (KeyEvent event)
@@ -87,20 +89,19 @@ void NanoApp::keyDown (KeyEvent event)
          setFullScreen (!isFullScreen());
          break;
    }
-
- //  gui->keyDown(event);
+   gui->keyDown (event);
 }
 
 void NanoApp::keyUp (KeyEvent event)
 {
-//	gui->keyUp(event);
+   gui->keyUp (event);
 }
 
 void NanoApp::resize()
 {
    camera.setPerspective (60.0f, getWindowAspectRatio(), 0.1f, 1000.0f);
    cameraUI.setCamera (&camera);
-  // gui->resize (getWindowSize());
+   gui->resize (getWindowSize());
 }
 
 void NanoApp::drawGrid (float size, float step)

@@ -4,11 +4,11 @@
 #include "cinder/CameraUi.h"
 #include "cinder/gl/gl.h"
 
-//#include "gui/View.h"
+#include "gui/View.h"
 
 using namespace ci;
 using namespace ci::app;
-using namespace std;
+
 
 class NanoApp : public App
 {
@@ -31,10 +31,10 @@ class NanoApp : public App
       void keyUp (KeyEvent event) override;
 
    private:
-     // ViewRef gui;
-     /* double prevt = 0;
+      ViewRef gui;
+      double prevt = 0;
       double cpuTime = 0;
-      bool usingGui = false;*/
+      bool usingGui = false;
       CameraPersp camera;
       CameraUi cameraUI;
       ivec2 mousePos;
